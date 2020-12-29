@@ -25,11 +25,14 @@ public class ScheduledDemo {
 //            System.out.println(Thread.currentThread().getName());
 //        },0,5, TimeUnit.MILLISECONDS);
 
-        System.out.println(scheduledExecutorService.isShutdown());
-        scheduledExecutorService.shutdown();
-        System.out.println(scheduledExecutorService.isShutdown());
+//        System.out.println(scheduledExecutorService.isShutdown());
+//        scheduledExecutorService.shutdown();
+//        System.out.println(scheduledExecutorService.isShutdown());
+
+
 
     }
+
 
 
 }
