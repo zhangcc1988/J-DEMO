@@ -61,5 +61,7 @@ public class StreamDemo {
 
 
         System.out.println("test");
+
+        System.out.println("add tag v2.0.0");
     }
 }
