@@ -60,6 +60,6 @@ public class StreamDemo {
         System.out.println(stu1.getName()+":"+stu1.getAge());
 
 
-
+        System.out.println("test");
     }
 }
