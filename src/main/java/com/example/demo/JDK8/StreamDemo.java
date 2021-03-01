@@ -2,12 +2,9 @@ package com.example.demo.JDK8;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.stream.Collectors;
 
 /**
  * created by zc  2021/1/4 15:55
@@ -17,14 +14,13 @@ public class StreamDemo {
 
     private static final ScheduledExecutorService redisMakeUpThreadPool = Executors.newScheduledThreadPool(16);
 
-
-    static class stu {
+    static class Stu {
         String name;
         Integer age;
 
         List<String> hubby = new ArrayList<>();
 
-        public stu(String name, Integer age, List<String> hubby) {
+        public Stu(String name, Integer age, List<String> hubby) {
             this.name = name;
             this.age = age;
             this.hubby = hubby;
@@ -55,61 +51,62 @@ public class StreamDemo {
         }
     }
 
+    /**
+     * peek()  类似map，但无返回
+     * skip(n) 跳过前面n个元素
+     */
+    public static void peekTest(List<Stu> stus) {
+        stus.stream()
+                .filter(stu -> stu.getAge() != null)
+                .map(stu -> stu.getName())
+                .skip(3)
+                .peek(System.out::println)
+                .count();
+    }
+
+    /**
+     * 排序比较器
+     *
+     * @param stus
+     */
+    public static void sortTest(List<Stu> stus) {
+        stus.stream().sorted(Comparator.comparing(Stu::getAge, Comparator.naturalOrder())
+                .thenComparing(Stu::getName, Comparator.naturalOrder()))
+                .forEach(stu -> {
+                    System.out.println(stu.getName() + ":" + stu.getAge());
+                });
+    }
+
 
     public static void main(String[] args) {
-        ArrayList<stu> stus = new ArrayList<>();
+        List<Stu> stus1 = new ArrayList<>();
+        stus1.add(new Stu("马明", 1, null));
+        stus1.add(new Stu("王强", 2, null));
+        stus1.add(new Stu("刘红", 3, null));
+        stus1.add(new Stu("黄飞", 3, null));
 
-
-//        List<stu> collect = stus.stream().filter(stu -> {
-//            if (stu.getName().equals("小天")) {
-//                stu.setAge(100);
-//            }
-//            return stu.getAge()<100;
-//        }).sorted((o1, o2) -> o1.getAge().compareTo(o2.getAge())).collect(Collectors.toList());
-//
-//        for (stu stu : collect) {
-//            System.out.println(stu.getName()+":"+stu.getAge());
-//        }
-//
-//        stu stu1 = stus.stream().filter(stu -> stu.getAge() != null).min((o1, o2) -> o1.getAge().compareTo(o2.getAge())).orElse(null);
-//
-//        System.out.println(stu1.getName()+":"+stu1.getAge());
-
-
-        List<stu> stus1 = new ArrayList<>();
-        stus1.add(new stu("马明",1,null));
-        stus1.add(new stu("王强",2,null));
-        stus1.add(new stu("刘红",3,null));
-        stus1.add(new stu("黄飞",3,null));
-
-
-        for (stu stu : stus1) {
+        for (Stu stu : stus1) {
             ArrayList<String> strings = new ArrayList<>();
             stu.setHubby(strings);
             if (stu.getName().equals("马明")) {
                 strings.add("打球");
                 strings.add("看电影");
                 strings.add("唱歌");
-            }else if (stu.getName().equals("王强")){
+            } else if (stu.getName().equals("王强")) {
                 strings.add("画画");
-            }else {
+            } else {
                 strings.add("游泳");
             }
         }
 
-        stus1.stream().sorted(Comparator.comparing(stu::getAge,Comparator.naturalOrder())
-                .thenComparing(stu::getName,Comparator.naturalOrder()))
-                .forEach(stu -> {
-                    System.out.println(stu.getName()+":"+stu.getAge());
-                });
+//        sortTest(stus1);
+//        peekTest(stus1);
+
+        //stus1.stream().parallel().limit(3).peek(stu1 -> System.out.println(stu1.getName())).count();
 
 
-        //stus1.stream().flatMap(stu -> stu.getHubby().stream()).collect(Collectors.toList()).forEach(System.out::println);
-
-
-        List<stu> collect = stus1.stream().filter(stu -> stu.getAge() > 100).collect(Collectors.toList());
-
-        collect.forEach(System.out::println);
 
     }
+
+
 }
