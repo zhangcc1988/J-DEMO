@@ -2,6 +2,10 @@ package com.example.demo.test;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * created by zc  2021/1/15 15:14
  */
@@ -56,11 +60,18 @@ public class JavaTest {
 //                .thenComparing(reversed))
 //                .collect(Collectors.toList());
 
+        String [] strs = {"xiaohua","qiang","lei","wangwu"};
 
-        int i = 11;
-        System.out.println(Math.floor(i/2));
-        System.out.println(i%2);
+        List<String> collect = Arrays.stream(strs).sorted((o1, o2) -> {
+            boolean b = false;
+            if (o1.equals("lei")) {
+                b = true;
+            }
+            return b ? 1 : -1;
+        }).collect(Collectors.toList());
 
-
+        for (String s : collect) {
+            System.out.println(s);
+        }
     }
 }
