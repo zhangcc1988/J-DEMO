@@ -73,5 +73,14 @@ public class JavaTest {
         for (String s : collect) {
             System.out.println(s);
         }
+
+
+
+
+
+
     }
+
+
+
 }
