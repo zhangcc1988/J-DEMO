@@ -30,4 +30,12 @@ public class AddServiceHandler implements InvocationHandler {
         return (AddService) Proxy.newProxyInstance(classLoader, clazz, addServiceHandler);
     }
 
+    public static SubtractService getProxy_two(Object bean) {
+        AddServiceHandler addServiceHandler = new AddServiceHandler(bean);
+        ClassLoader classLoader = bean.getClass().getClassLoader();
+        Class[] clazz = {SubtractService.class};
+        return (SubtractService) Proxy.newProxyInstance(classLoader, clazz, addServiceHandler);
+    }
+
+
 }
