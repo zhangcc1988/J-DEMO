@@ -10,15 +10,21 @@ import java.lang.reflect.Proxy;
 public class AddServiceHandler implements InvocationHandler {
 
     private Object bean;
+    private Method method;
 
     public AddServiceHandler(Object bean) {
         this.bean = bean;
     }
 
+    public AddServiceHandler(Object bean, Method method) {
+        this.bean = bean;
+        this.method = method;
+    }
+
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("before");
-        Object invoke = method.invoke(bean, args);
+        Object invoke = this.method.invoke(bean, "超");
         System.out.println("after");
         return invoke;
     }
@@ -37,5 +43,12 @@ public class AddServiceHandler implements InvocationHandler {
         return (SubtractService) Proxy.newProxyInstance(classLoader, clazz, addServiceHandler);
     }
 
+
+    public static MultiplyService getProxy_str(Object bean,Method method) throws NoSuchMethodException {
+        AddServiceHandler addServiceHandler = new AddServiceHandler(bean,method);
+        ClassLoader classLoader = bean.getClass().getClassLoader();
+        Class[] clazz = {MultiplyService.class};
+        return (MultiplyService) Proxy.newProxyInstance(classLoader, clazz, addServiceHandler);
+    }
 
 }
