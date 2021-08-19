@@ -3,6 +3,7 @@ package com.example.demo.test;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,15 +14,16 @@ public class JavaTest {
 
     static class Man {
 
-        String name;
+        Integer score;
         Integer age;
+        Date birthDay;
 
-        public String getName() {
-            return name;
+        public Integer getScore() {
+            return score;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setScore(Integer score) {
+            this.score = score;
         }
 
         public Integer getAge() {
@@ -32,12 +34,18 @@ public class JavaTest {
             this.age = age;
         }
 
-        public Man(String name, Integer age) {
-            this.name = name;
-            this.age = age;
+        public Date getBirthDay() {
+            return birthDay;
         }
 
-        public Man() {
+        public void setBirthDay(Date birthDay) {
+            this.birthDay = birthDay;
+        }
+
+        public Man(Integer score, Integer age, Date birthDay) {
+            this.score = score;
+            this.age = age;
+            this.birthDay = birthDay;
         }
     }
 
@@ -50,6 +58,10 @@ public class JavaTest {
         List<String> hobby;
     }
 
+
+    public static void fn(String n){
+        n = "xixiix";
+    }
 
     public static void main(String[] args) {
 
@@ -72,12 +84,38 @@ public class JavaTest {
 //        }
 
 
-        Integer flag = 0;
+//        String l =  "244685293611304345936";
+//
+//        StringBuilder stringBuilder = new StringBuilder();
+//        stringBuilder.append(l);
+//        if (stringBuilder.length() > String.valueOf(Long.MAX_VALUE).length()){
+//            String substring = stringBuilder.substring(0, String.valueOf(Long.MAX_VALUE).length());
+//
+//            System.out.println(Long.parseLong(substring));
+//        }
 
-        System.out.println(null != flag && flag > 1 || flag < 2);
+
+//
+//        Map<String, Integer> collect = array.stream().collect(Collectors.toMap(Man::getName, Man::getAge));
+//        TreeMap<String, Man> treeMap = array.stream().collect(Collectors.toMap(Man::getName, Function.identity(), (man, man2) -> man, TreeMap::new));
+//
+//        System.out.println(JSON.toJSONString(collect));
+//        System.out.println(JSON.toJSONString(treeMap));
+
+
+//        String s = "231.gif";
+//        System.out.println(s.matches("[1-9]\\d*|0"));
+//
+//        boolean gif = s.substring(s.lastIndexOf(".") + 1).equals("gif");
+//        System.out.println(gif);
+
+
+
+
 
 
     }
+
 
 
 }
