@@ -18,6 +18,8 @@ public class JavaTest {
         Integer age;
         Date birthDay;
 
+        List<String>  hobby;
+
         public Integer getScore() {
             return score;
         }
@@ -42,10 +44,22 @@ public class JavaTest {
             this.birthDay = birthDay;
         }
 
+
+        public List<String> getHobby() {
+            return hobby;
+        }
+
+        public void setHobby(List<String> hobby) {
+            this.hobby = hobby;
+        }
+
         public Man(Integer score, Integer age, Date birthDay) {
             this.score = score;
             this.age = age;
             this.birthDay = birthDay;
+        }
+
+        public Man() {
         }
     }
 
@@ -108,13 +122,22 @@ public class JavaTest {
 //
 //        boolean gif = s.substring(s.lastIndexOf(".") + 1).equals("gif");
 //        System.out.println(gif);
-
-
-
+//        ArrayList<String> h = new ArrayList<>();
+//        h.add("打球");
+//        h.add("听歌");
+//        Man man = new Man();
+//        man.setHobby(h);
+//        System.out.println(JSON.toJSONString(man.getHobby()));
+//
+//        h.add("玩游戏");
+//
+//        System.out.println(JSON.toJSONString(man.getHobby()));
 
 
 
     }
+
+
 
 
 
